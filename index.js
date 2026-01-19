@@ -48,6 +48,12 @@ async function run() {
       res.send("server is working");
     });
 
+    app.get("/coffees", async (req, res) => {
+      const cursor = coffeesCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     app.post("/coffees", async (req, res) => {
       const newCoffee = req.body;
       // console.log(newCoffee);
@@ -56,7 +62,7 @@ async function run() {
     });
     // ==================================================================
     console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
+      "Pinged your deployment. You successfully connected to MongoDB!",
     );
   } catch (error) {
     console.log(error);
