@@ -23,7 +23,7 @@ app.use(express.json());
 
 //======================= 04 mongodb config
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.89rnkti.mongodb.net/?appName=Cluster0`;
-console.log(uri);
+// console.log(uri);
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -42,12 +42,14 @@ async function run() {
     await client.db("admin").command({ ping: 1 });
 
     const coffeesCollection = client.db("coffeesDB").collection("coffees");
+    const usersCollection = client.db("coffeesDB").collection("users");
 
     // ================= 05 server side routes==========================
     app.get("/", (req, res) => {
       res.send("server is working");
     });
 
+    // ========== coffees collection api =============
     app.get("/coffees", async (req, res) => {
       const cursor = coffeesCollection.find();
       const result = await cursor.toArray();
@@ -80,7 +82,7 @@ async function run() {
           taste: updatedCoffee.taste,
           category: updatedCoffee.category,
           details: updatedCoffee.details,
-          photo: updatedCoffee.details,
+          photo: updatedCoffee.photo,
         },
       };
       const options = { upsert: true };
@@ -92,6 +94,14 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await coffeesCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // ========== users collection api =============
+    app.post("/users", async (req, res) => {
+      const newUser = req.body;
+      // console.log(newCoffee);
+      const result = await usersCollection.insertOne(newUser);
       res.send(result);
     });
     // ==================================================================
