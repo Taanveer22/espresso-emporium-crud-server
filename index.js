@@ -98,12 +98,19 @@ async function run() {
     });
 
     // ========== users collection api =============
+    app.get("/users", async (req, res) => {
+      const cursor = usersCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     app.post("/users", async (req, res) => {
       const newUser = req.body;
       // console.log(newCoffee);
       const result = await usersCollection.insertOne(newUser);
       res.send(result);
     });
+    
     // ==================================================================
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!",
