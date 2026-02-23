@@ -19,14 +19,14 @@ Alhamdulillah, this backend is fully functional and optimized for handling user 
 ### ⚙️ Infrastructure & Setup
 *   **Core:** Basic server architecture built with Node.js and Express.
 *   **Database:** Integrated MongoDB for persistent data storage.
-*   **Deployment:** Added `vercel.json` configuration for hosting on the [Vercel](https://vercel.com) platform.
+*   **Deployment:** Configured for seamless hosting on the [Render](https://render.com) platform.
 *   **Maintenance:** Dependency management via updated `package.json`.
 
 ## 💻 Tech Stack
 - **Runtime:** [Node.js](https://nodejs.org)
 - **Framework:** [Express.js](https://expressjs.com)
 - **Database:** [MongoDB](https://www.mongodb.com)
-- **Deployment:** [Vercel](https://vercel.com)
+- **Deployment:** [Render](https://render.com)
 
 ---
 
